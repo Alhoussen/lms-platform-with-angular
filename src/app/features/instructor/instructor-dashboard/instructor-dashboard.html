@@ -1,0 +1,167 @@
+<section class="instructor-dashboard">
+  <div class="dashboard-header">
+    <h2>👨‍🏫 Espace Instructeur</h2>
+    <p class="subtitle">Gérez vos cours et leur contenu</p>
+  </div>
+
+  <button class="btn-add-course" (click)="openAdd()" *ngIf="!showForm()">
+    <span class="icon">➕</span>
+    Créer un nouveau cours
+  </button>
+
+  <!-- FORMULAIRE PRINCIPAL -->
+  <div *ngIf="showForm()" class="form-container">
+    <form class="course-form" (ngSubmit)="save()">
+      <div class="form-header">
+        <h3>{{ editId() ? '✏️ Modifier le cours' : '📝 Nouveau cours' }}</h3>
+        <button type="button" class="btn-close" (click)="cancel()">✕</button>
+      </div>
+
+      <div class="form-body">
+        <!-- Basic Information -->
+        <div class="form-section">
+          <h4>Informations de base</h4>
+          <div class="form-grid">
+            <label class="form-field">
+              <span class="label-text">Titre du cours *</span>
+              <input [(ngModel)]="form().title" name="title" placeholder="Ex: Angular Avancé" required />
+            </label>
+
+            <label class="form-field">
+              <span class="label-text">Catégorie *</span>
+              <input [(ngModel)]="form().category" name="category" placeholder="Ex: Développement Web" required />
+            </label>
+          </div>
+
+          <label class="form-field">
+            <span class="label-text">Description</span>
+            <textarea [(ngModel)]="form().description" name="description" placeholder="Décrivez votre cours..."
+              rows="4"></textarea>
+          </label>
+        </div>
+
+        <!-- SECTION CHAPITRES -->
+        <div class="form-section chapters-section">
+          <div class="section-header">
+            <h4>📚 Chapitres et Leçons</h4>
+            <button type="button" class="btn-add-chapter" (click)="addChapter()">
+              <span>➕</span> Ajouter un chapitre
+            </button>
+          </div>
+
+          <div class="chapters-list" *ngIf="form().chapters.length > 0; else noChapters">
+            <div *ngFor="let chapter of form().chapters; let i = index" class="chapter-card">
+              <div class="chapter-header">
+                <span class="chapter-number">Chapitre {{ i + 1 }}</span>
+                <button type="button" class="btn-delete-chapter" (click)="removeChapter(i)">
+                  🗑️ Supprimer
+                </button>
+              </div>
+
+              <label class="form-field">
+                <span class="label-text">Titre du chapitre *</span>
+                <input [(ngModel)]="chapter.title" [name]="'chapter_title_' + i"
+                  placeholder="Ex: Introduction à Angular" required />
+              </label>
+
+              <!-- SECTION LEÇONS -->
+              <div class="lessons-section">
+                <div class="lessons-header">
+                  <h5>🎥 Leçons</h5>
+                  <button type="button" class="btn-add-lesson" (click)="addLesson(i)">
+                    ➕ Ajouter une leçon
+                  </button>
+                </div>
+
+                <div class="lessons-list" *ngIf="chapter.lessons.length > 0; else noLessons">
+                  <div *ngFor="let lesson of chapter.lessons; let j = index" class="lesson-card">
+                    <div class="lesson-header">
+                      <span class="lesson-number">Leçon {{ j + 1 }}</span>
+                      <button type="button" class="btn-delete-lesson" (click)="removeLesson(i, j)">
+                        ✕
+                      </button>
+                    </div>
+
+                    <div class="lesson-fields">
+                      <label class="form-field">
+                        <span class="label-text">Titre *</span>
+                        <input [(ngModel)]="lesson.title" [name]="'lesson_title_' + i + '_' + j"
+                          placeholder="Ex: Installation et configuration" required />
+                      </label>
+
+                      <label class="form-field">
+                        <span class="label-text">URL Vidéo *</span>
+                        <input [(ngModel)]="lesson.videoUrl" [name]="'lesson_url_' + i + '_' + j"
+                          placeholder="https://example.com/video.mp4" required />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #noLessons>
+                  <div class="empty-lessons">
+                    <p>Aucune leçon. Cliquez sur "Ajouter une leçon" pour commencer.</p>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noChapters>
+            <div class="empty-chapters">
+              <div class="empty-icon">📚</div>
+              <p>Aucun chapitre. Cliquez sur "Ajouter un chapitre" pour structurer votre cours.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-save">
+          <span class="icon">💾</span>
+          {{ editId() ? 'Enregistrer les modifications' : 'Créer le cours' }}
+        </button>
+        <button type="button" class="btn-cancel" (click)="cancel()">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- LISTE DES COURS -->
+  <div *ngIf="!showForm()" class="courses-list">
+    <h3>📖 Mes Cours ({{ courses().length }})</h3>
+
+    <div class="courses-grid" *ngIf="courses().length > 0; else noCourses">
+      <div *ngFor="let course of courses()" class="course-item">
+        <div class="course-content">
+          <h4>{{ course.title }}</h4>
+          <p class="course-description">{{ course.description }}</p>
+          <div class="course-meta">
+            <span class="category">{{ course.category }}</span>
+            <span class="chapters-count">{{ course.chapters.length }} chapitres</span>
+          </div>
+        </div>
+
+        <div class="course-actions">
+          <button class="btn-edit" (click)="openEdit(course)">
+            <span class="icon">✏️</span>
+            Modifier
+          </button>
+          <button class="btn-delete" (click)="remove(course.id)">
+            <span class="icon">🗑️</span>
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noCourses>
+      <div class="empty-state">
+        <div class="empty-icon">📚</div>
+        <h3>Aucun cours créé</h3>
+        <p>Commencez par créer votre premier cours</p>
+      </div>
+    </ng-template>
+  </div>
+</section>
