@@ -1,0 +1,90 @@
+.main-nav {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 70px;
+  }
+
+  .nav-brand {
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+
+      .icon {
+        font-size: 1.125rem;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        background: white;
+        color: #667eea;
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+}
+
+.main-content {
+  min-height: calc(100vh - 70px);
+  padding: var(--spacing-xl) 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-nav {
+    .nav-container {
+      flex-direction: column;
+      padding: var(--spacing-md);
+      gap: var(--spacing-md);
+    }
+
+    .nav-links {
+      width: 100%;
+      flex-direction: column;
+
+      a {
+        justify-content: center;
+      }
+    }
+  }
+}
