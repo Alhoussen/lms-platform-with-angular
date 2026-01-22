@@ -1,0 +1,86 @@
+<section class="student-dashboard">
+  <div class="dashboard-header">
+    <h2>📊 Tableau de bord Étudiant</h2>
+    <p class="subtitle">Suivez votre progression et gérez vos cours</p>
+  </div>
+
+  <!-- Overall Progress -->
+  <div class="stats-grid">
+    <div class="stat-card overall-progress">
+      <div class="stat-icon">🎯</div>
+      <div class="stat-content">
+        <h3>Progression Générale</h3>
+        <div class="progress-wrapper">
+          <progress [value]="totalCompletedLessons()" [max]="totalPossibleLessons()"></progress>
+          <div class="progress-info">
+            <span class="progress-count">
+              {{ totalCompletedLessons() }} / {{ totalPossibleLessons() }} leçons
+            </span>
+            <span class="progress-percent">
+              {{ overallProgressPercentage() | number:'1.0-0' }}%
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📚</div>
+      <div class="stat-content">
+        <h3>Cours Inscrits</h3>
+        <p class="stat-value">{{ courses().length }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-content">
+        <h3>Leçons Complétées</h3>
+        <p class="stat-value">{{ totalCompletedLessons() }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course List with Individual Progress -->
+  <div class="courses-section">
+    <h3>📖 Mes Cours</h3>
+
+    <div class="courses-grid" *ngIf="courses().length > 0; else noCourses">
+      <div *ngFor="let course of courses()" class="course-progress-card">
+        <div class="course-info">
+          <h4>{{ course.title }}</h4>
+          <p class="course-description">{{ course.description }}</p>
+          <span class="course-category">{{ course.category }}</span>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-stats">
+            <span class="completed">
+              {{ getProgressForCourse()(course.id).completed }} / {{ getProgressForCourse()(course.id).total }}
+            </span>
+            <span class="percentage">
+              {{ getProgressForCourse()(course.id).percentage | number:'1.0-0' }}%
+            </span>
+          </div>
+          <progress [value]="getProgressForCourse()(course.id).completed"
+            [max]="getProgressForCourse()(course.id).total">
+          </progress>
+        </div>
+
+        <a [routerLink]="['/courses', course.id]" class="btn-continue">
+          {{ getProgressForCourse()(course.id).percentage > 0 ? 'Continuer' : 'Commencer' }}
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <ng-template #noCourses>
+      <div class="empty-state">
+        <div class="empty-icon">📚</div>
+        <h3>Aucun cours inscrit</h3>
+        <p>Explorez le catalogue pour commencer votre apprentissage</p>
+        <a routerLink="/" class="btn-primary">Voir le catalogue</a>
+      </div>
+    </ng-template>
+  </div>
+</section>
