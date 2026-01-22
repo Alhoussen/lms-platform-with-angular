@@ -1,0 +1,11 @@
+<div class="video-player-container">
+  <ng-container *ngIf="videoUrl; else noVideo">
+    <video width="100%" controls [src]="videoUrl"></video>
+  </ng-container>
+  <ng-template #noVideo>
+    <div class="no-video">
+      <span class="icon">🎬</span>
+      <p>Pas de vidéo sélectionnée.</p>
+    </div>
+  </ng-template>
+</div>
