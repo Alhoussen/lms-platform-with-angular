@@ -1,0 +1,19 @@
+<section class="course-catalog">
+  <h2>Catalogue des cours</h2>
+  <ng-container *ngIf="courses().length; else loading">
+    <div class="catalog-grid">
+      <div class="course-card" *ngFor="let course of courses()">
+        <a [routerLink]="['/courses', course.id]" class="course-link">
+          <h3>{{ course.title }}</h3>
+        </a>
+        <p>{{ course.description }}</p>
+        <span class="category">Catégorie : {{ course.category }}</span>
+        <button [routerLink]="['/courses', course.id]" class="btn-details">Voir le cours</button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <p>Chargement des cours...</p>
+  </ng-template>
+</section>
+
