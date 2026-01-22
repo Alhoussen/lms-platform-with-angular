@@ -1,0 +1,93 @@
+<section class="course-detail">
+  <ng-container *ngIf="course() as c; else loading">
+    <div class="course-header">
+      <div class="header-content">
+        <a routerLink="/" class="back-link">
+          <span>←</span> Retour au catalogue
+        </a>
+        <h2>{{ c.title }}</h2>
+        <p class="description">{{ c.description }}</p>
+        <span class="category-badge">{{ c.category }}</span>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="progress-card">
+        <div class="progress-header">
+          <h3>📈 Votre Progression</h3>
+          <span class="progress-text">
+            {{ completedLessonsCount() }} / {{ totalLessonsCount() }} leçons
+          </span>
+        </div>
+        <progress [value]="completedLessonsCount()" [max]="totalLessonsCount()"></progress>
+        <div class="progress-percentage">
+          {{ totalLessonsCount() > 0 ? ((completedLessonsCount() / totalLessonsCount()) * 100 | number:'1.0-0') : 0 }}%
+          complété
+        </div>
+      </div>
+    </div>
+
+    <div class="course-content">
+      <!-- SIDEBAR: CHAPTERS AND LESSONS -->
+      <aside class="sidebar">
+        <h3>📚 Contenu du cours</h3>
+
+        <div class="chapters-list">
+          <div *ngFor="let chapter of c.chapters" class="chapter-block">
+            <div class="chapter-header" (click)="onSelectChapter(chapter.id)">
+              <h4>{{ chapter.title }}</h4>
+              <span class="chapter-toggle" [class.active]="selectedChapterId() === chapter.id">
+                {{ selectedChapterId() === chapter.id ? '▼' : '▶' }}
+              </span>
+            </div>
+
+            <ul class="lessons-list" *ngIf="selectedChapterId() === chapter.id">
+              <li *ngFor="let lesson of lessonsByChapter()[chapter.id]" class="lesson-item">
+                <button class="lesson-button" (click)="selectLesson(lesson.id)"
+                  [class.selected]="selectedLessonId() === lesson.id">
+                  <span class="lesson-icon">🎥</span>
+                  <span class="lesson-title">{{ lesson.title }}</span>
+                </button>
+                <button class="completion-toggle" [class.completed]="progressService.isLessonCompleted(lesson.id)()"
+                  (click)="progressService.toggleLessonStatus(userId, c.id, lesson.id)">
+                  <span *ngIf="progressService.isLessonCompleted(lesson.id)(); else notCompleted">
+                    ✓
+                  </span>
+                  <ng-template #notCompleted>○</ng-template>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT: VIDEO AND QUIZ -->
+      <main class="main-area">
+        <!-- VIDEO PLAYER -->
+        <div class="video-section" *ngIf="selectedLessonId() as lid; else selectPrompt">
+          <app-video-player [videoUrl]="getLessonVideoUrl(lid)"></app-video-player>
+        </div>
+
+        <ng-template #selectPrompt>
+          <div class="empty-state">
+            <div class="empty-icon">🎬</div>
+            <h3>Sélectionnez une leçon</h3>
+            <p>Choisissez une leçon dans le menu à gauche pour commencer</p>
+          </div>
+        </ng-template>
+
+        <!-- QUIZ -->
+        <div class="quiz-section" *ngIf="selectedChapterId()">
+          <app-chapter-quiz [questions]="quizQuestions" [chapterId]="selectedChapterId()!" [userId]="userId">
+          </app-chapter-quiz>
+        </div>
+      </main>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Chargement du cours...</p>
+    </div>
+  </ng-template>
+</section>
