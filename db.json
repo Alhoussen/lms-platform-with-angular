@@ -1,0 +1,220 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "role": "student"
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "role": "instructor"
+    },
+    {
+      "id": 3,
+      "name": "Charly",
+      "role": "student"
+    },
+    {
+      "id": 4,
+      "name": "Diane",
+      "role": "instructor"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "Angular Avancé",
+      "category": "Web",
+      "instructorId": 2,
+      "description": "Maîtrisez Angular 17 et les signaux.",
+      "chapters": [
+        {
+          "id": 1,
+          "title": "Introduction",
+          "lessons": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Gestion d'état",
+          "lessons": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Spring Boot Sécurité",
+      "category": "Backend",
+      "instructorId": 4,
+      "description": "Sécurisez vos API avec Spring Boot et JWT.",
+      "chapters": [
+        {
+          "id": 3,
+          "title": "Sécurité Web",
+          "lessons": [
+            4,
+            5
+          ]
+        },
+        {
+          "id": 4,
+          "title": "JWT Avancé",
+          "lessons": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Machine Learning",
+      "category": "IA",
+      "description": "Construisez des modeles ia grace aux techniques d'apprentissage supervisee et non supervisee",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "id": 1769126003845,
+          "title": "Introduction au Machine Learning",
+          "lessons": [
+            7
+          ]
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Bienvenue",
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "chapterId": 1
+    },
+    {
+      "id": 2,
+      "title": "Installation",
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "chapterId": 1
+    },
+    {
+      "id": 3,
+      "title": "Signals",
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "chapterId": 2
+    },
+    {
+      "id": 4,
+      "title": "Spring Security Basics",
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "chapterId": 3
+    },
+    {
+      "id": 5,
+      "title": "Configurer JWT",
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "chapterId": 3
+    },
+    {
+      "id": 6,
+      "title": "JWT avancé",
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      "chapterId": 4
+    },
+    {
+      "id": 7
+    }
+  ],
+  "progress": [
+    {
+      "userId": 1,
+      "courseId": 1,
+      "completedLessons": [
+        1,
+        2
+      ]
+    },
+    {
+      "userId": 1,
+      "courseId": 2,
+      "completedLessons": [
+        4
+      ]
+    },
+    {
+      "userId": 3,
+      "courseId": 1,
+      "completedLessons": []
+    },
+    {
+      "userId": 3,
+      "courseId": 2,
+      "completedLessons": [
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "id": 1,
+      "chapterId": 1,
+      "questions": [
+        {
+          "id": 1,
+          "question": "Qu'est-ce qu'un composant standalone ?",
+          "choices": [
+            "Un module",
+            "Un composant sans NgModule",
+            "Un service"
+          ],
+          "answer": 1
+        },
+        {
+          "id": 2,
+          "question": "À quoi sert le décorateur @Component ?",
+          "choices": [
+            "Définir un service",
+            "Définir un composant",
+            "Définir un module"
+          ],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "chapterId": 3,
+      "questions": [
+        {
+          "id": 1,
+          "question": "Quel est le rôle de JWT ?",
+          "choices": [
+            "Authentifier les requêtes",
+            "Stocker des vidéos",
+            "Gérer le CSS"
+          ],
+          "answer": 0
+        }
+      ]
+    }
+  ],
+  "quizResults": [
+    {
+      "userId": 1,
+      "chapterId": 1,
+      "score": 2,
+      "total": 2
+    },
+    {
+      "userId": 3,
+      "chapterId": 3,
+      "score": 1,
+      "total": 1
+    }
+  ]
+}
