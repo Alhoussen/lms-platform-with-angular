@@ -1,0 +1,78 @@
+<section class="chapter-quiz" *ngIf="questions.length; else noQuiz">
+  <div class="quiz-container">
+    <div *ngIf="!finished(); else quizDone" class="quiz-active">
+      <div class="quiz-header">
+        <h3>📝 Quiz du chapitre</h3>
+        <span class="question-counter">Question {{ current() + 1 }} / {{ questions.length }}</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="((current() + 1) / questions.length) * 100"></div>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">
+          <strong>Q{{ current() + 1 }}.</strong> {{ questions[current()].question }}
+        </p>
+
+        <ul class="choices-list">
+          <li *ngFor="let choice of questions[current()].choices; let i = index">
+            <button class="choice-button" [class.selected]="selected() === i" [class.disabled]="feedback() !== null"
+              (click)="selectChoice(i)" [disabled]="feedback() !== null">
+              <span class="choice-indicator">{{ String.fromCharCode(65 + i) }}</span>
+              <span class="choice-text">{{ choice }}</span>
+              <span class="check-mark" *ngIf="selected() === i">✓</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="feedback-section" *ngIf="feedback()">
+          <div class="feedback" [class.correct]="feedback() === 'Bonne réponse !'"
+            [class.incorrect]="feedback() === 'Mauvaise réponse.'">
+            <span class="feedback-icon">{{ feedback() === 'Bonne réponse !' ? '✅' : '❌' }}</span>
+            <span class="feedback-text">{{ feedback() }}</span>
+          </div>
+        </div>
+
+        <div class="quiz-actions">
+          <button class="btn-submit" (click)="submit()" [disabled]="selected() === null || feedback()"
+            *ngIf="!feedback()">
+            Valider ma réponse
+          </button>
+
+          <button class="btn-next" (click)="next()" *ngIf="feedback()">
+            {{ current() < questions.length - 1 ? 'Question suivante →' : 'Terminer le quiz' }} </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #quizDone>
+      <div class="quiz-results">
+        <div class="results-icon">
+          {{ score() / questions.length >= 0.7 ? '🎉' : '📚' }}
+        </div>
+        <h3>Quiz terminé !</h3>
+        <div class="score-display">
+          <span class="score">{{ score() }} / {{ questions.length }}</span>
+          <span class="percentage">{{ (score() / questions.length * 100) | number:'1.0-0' }}%</span>
+        </div>
+        <p class="result-message">
+          {{ score() / questions.length >= 0.7
+          ? 'Excellent travail ! Vous maîtrisez bien ce chapitre.'
+          : 'Continuez à apprendre, vous progressez !' }}
+        </p>
+        <div class="already-passed-notice" *ngIf="alreadyPassed()">
+          <span class="icon">ℹ️</span>
+          <span>Ce résultat a été enregistré</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</section>
+
+<ng-template #noQuiz>
+  <div class="no-quiz">
+    <span class="icon">📝</span>
+    <p>Aucun quiz disponible pour ce chapitre.</p>
+  </div>
+</ng-template>
