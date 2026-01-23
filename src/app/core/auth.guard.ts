@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = (route, state) => {
         return true;
     }
 
-    // Si pas connecté, redirection (pour l'instant vers l'accueil, idéalement vers /login)
+    // Si pas connecté, redirection (pour l'instant vers l'accueil)
     alert("Vous devez être connecté pour accéder à cette page.");
     return router.createUrlTree(['/']);
 };
