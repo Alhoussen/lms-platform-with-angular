@@ -1,13 +1,8 @@
-/* ========================================
-   GLOBAL STYLES - LMS PLATFORM
-   ======================================== */
-
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* ========================================
-   CSS VARIABLES - DESIGN SYSTEM
-   ======================================== */
+
+  //  CSS VARIABLES - DESIGN SYSTEM
 :root {
   /* Colors - Modern Palette */
   --color-primary: #6366f1;
@@ -53,9 +48,7 @@
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ========================================
-   RESET & BASE STYLES
-   ======================================== */
+//  RESET & BASE STYLES
 * {
   margin: 0;
   padding: 0;
@@ -76,9 +69,7 @@ body {
   min-height: 100vh;
 }
 
-/* ========================================
-   TYPOGRAPHY
-   ======================================== */
+//  TYPOGRAPHY
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
@@ -98,9 +89,7 @@ p {
   color: var(--color-text-light);
 }
 
-/* ========================================
-   BUTTONS - GLOBAL STYLES
-   ======================================== */
+//  BUTTONS - GLOBAL STYLES
 button, .btn {
   font-family: inherit;
   font-size: 0.875rem;
@@ -192,9 +181,7 @@ button, .btn {
   font-size: 1rem;
 }
 
-/* ========================================
-   FORMS - GLOBAL STYLES
-   ======================================== */
+//  FORMS - GLOBAL STYLES
 input, textarea, select {
   font-family: inherit;
   font-size: 0.875rem;
@@ -234,9 +221,7 @@ label {
   }
 }
 
-/* ========================================
-   PROGRESS BARS
-   ======================================== */
+//  PROGRESS BARS
 progress {
   width: 100%;
   height: 0.5rem;
@@ -262,9 +247,7 @@ progress {
   }
 }
 
-/* ========================================
-   CARDS
-   ======================================== */
+//  CARDS
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -278,9 +261,7 @@ progress {
   }
 }
 
-/* ========================================
-   UTILITIES
-   ======================================== */
+//  UTILITIES
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -305,9 +286,7 @@ progress {
 .mt-lg { margin-top: var(--spacing-lg); }
 .mt-xl { margin-top: var(--spacing-xl); }
 
-/* ========================================
-   ANIMATIONS
-   ======================================== */
+//  ANIMATIONS
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -338,9 +317,6 @@ progress {
   animation: slideIn var(--transition-slow) ease-out;
 }
 
-/* ========================================
-   SCROLLBAR STYLING
-   ======================================== */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
