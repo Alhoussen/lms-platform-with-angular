@@ -77,12 +77,3 @@ src/
 └── db.json                 # Base de données Mock (JSON Server)
 ```
 
-## Points Clés pour l'Évaluation
-
-*   **Architecture** : Séparation stricte Smart/Dumb components.
-*   **Performance** : Utilisation de `OnPush` (implicite avec Signals) et Lazy Loading des routes.
-*   **UX** : Feedback visuel immédiat, transitions fluides, et gestion des erreurs (404/Empty states).
-*   **Code Quality** : Typage TypeScript strict, utilisation des `computed` signals pour les calculs dérivés (progression, scores).
-
----
-<!-- *Projet réalisé pour l'examen Angular 2025.* -->
