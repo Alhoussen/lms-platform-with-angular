@@ -1,59 +1,88 @@
-# LmsPlatform
+# 📚 LMS Platform - Plateforme d'Apprentissage en Ligne
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+Ce projet est une plateforme LMS (Learning Management System) développée avec **Angular 21**, démontrant l'utilisation des dernières fonctionnalités du framework comme les **Signals**, les **Standalone Components**, le **SSR** (Server-Side Rendering) et le **Lazy Loading**.
 
-## Development server
+![Version Angular](https://img.shields.io/badge/Angular-21.0.0-dd0031.svg)
+![State Management](https://img.shields.io/badge/State-Signals-blue.svg)
 
-To start a local development server, run:
+## Fonctionnalités
 
-```bash
-ng serve
+### Espace Étudiant
+*   **Catalogue de Cours** : Exploration des cours par cartes interactives avec filtres par catégorie.
+*   **Lecture de Cours** :
+    *   Lecteur vidéo intégré avec support des chapitres et leçons.
+    *   Suivi de la progression en temps réel (barre de progression, indicateurs visuels).
+    *   Marquage manuel des leçons comme "Terminées".
+*   **Quiz Interactifs** : QCM de fin de chapitre avec feedback immédiat.
+*   **Tableau de Bord** :
+    *   Vue d'ensemble de la progression.
+    *   **Génération de Certificat PDF** 🏆 (téléchargeable une fois le cours complété à 100%).
+
+### Espace Instructeur
+*   **Gestion Complète (CRUD)** : Création, modification et suppression de cours.
+*   **Éditeur de Contenu** : Interface intuitive pour ajouter/supprimer des chapitres et des leçons.
+*   **Création de Quiz** : Interface dédiée pour créer des QCMs rattachés aux chapitres.
+
+### Sécurité & Architecture
+*   **Authentification Simulée** : Gestion des rôles (Étudiant / Instructeur) avec persistance (localStorage).
+*   **Guards** : Protection des routes (`/instructor` accessible uniquement aux instructeurs).
+*   **Architecture Modulaire** :
+    *   `core/` : Services singletons, Guards, Modèles.
+    *   `features/` : Composants métiers (Lazy loaded).
+    *   `shared/` : Composants réutilisables.
+
+## Stack Technique
+
+*   **Framework** : Angular 21 (Standalone Components)
+*   **Gestion d'État** : Angular Signals (Pas de NgRx ou libraries externes, pur Angular)
+*   **Styles** : SCSS avec variables CSS natives pour un design system cohérent.
+*   **Backend** : `json-server` (Mock API REST complète).
+*   **PDF** : `jspdf` pour la génération de certificats client-side.
+
+## Installation et Lancement
+
+1.  **Installer les dépendances** :
+    ```bash
+    npm install
+    ```
+
+2.  **Lancer le Mock Backend** (dans un terminal séparé) :
+    Les données sont stockées dans `db.json`.
+    ```bash
+    npm run json-server
+    ```
+
+3.  **Lancer l'application Angular** :
+    ```bash
+    npm start
+    ```
+    L'application sera accessible sur `http://localhost:4200`.
+
+## Structure du Projet
+
+```
+src/
+├── app/
+│   ├── core/               # Services globaux, Guards, Interceptors
+│   │   ├── auth.service.ts # Gestion Auth & Rôles
+│   │   ├── quiz.service.ts # Logique Quiz
+│   │   ├── certificate.service.ts # Génération PDF
+│   │   └── ...
+│   ├── features/           # Modules fonctionnels (Lazy Loaded)
+│   │   ├── courses/        # Catalogue, Détail, Lecteur Vidéo
+│   │   ├── dashboard/      # Dashboard Étudiant
+│   │   └── instructor/     # Dashboard Instructeur
+│   └── app.routes.ts       # Routing principal
+├── styles.scss             # Design System global
+└── db.json                 # Base de données Mock (JSON Server)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Points Clés pour l'Évaluation
 
-## Code scaffolding
+*   **Architecture** : Séparation stricte Smart/Dumb components.
+*   **Performance** : Utilisation de `OnPush` (implicite avec Signals) et Lazy Loading des routes.
+*   **UX** : Feedback visuel immédiat, transitions fluides, et gestion des erreurs (404/Empty states).
+*   **Code Quality** : Typage TypeScript strict, utilisation des `computed` signals pour les calculs dérivés (progression, scores).
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+<!-- *Projet réalisé pour l'examen Angular 2025.* -->
