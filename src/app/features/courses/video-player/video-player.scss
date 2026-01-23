@@ -1,0 +1,32 @@
+.video-player-container {
+  width: 100%;
+  background: #000;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+
+  video {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 600px;
+  }
+
+  .no-video {
+    padding: var(--spacing-2xl);
+    text-align: center;
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--spacing-md);
+
+    .icon {
+      font-size: 3rem;
+      opacity: 0.5;
+    }
+  }
+}
