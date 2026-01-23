@@ -71,6 +71,11 @@
           {{ getProgressForCourse()(course.id).percentage > 0 ? 'Continuer' : 'Commencer' }}
           <span class="arrow">→</span>
         </a>
+
+        <button *ngIf="isEligibleForCertificate()(course.id)" class="btn-certificate"
+          (click)="downloadCertificate(course)">
+          🏆 Télécharger le certificat
+        </button>
       </div>
     </div>
 
