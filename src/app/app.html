@@ -17,8 +17,27 @@
         Espace Instructeur
       </a>
     </div>
+
+    <div class="auth-actions">
+      <ng-container *ngIf="authService.currentUser() as user; else loginButtons">
+        <span class="user-greeting">
+          Bonjour, <strong>{{ user.name }}</strong> ({{ user.role }})
+        </span>
+        <button (click)="authService.logout()" class="btn-logout">Déconnexion</button>
+      </ng-container>
+
+      <ng-template #loginButtons>
+        <button (click)="authService.loginAsStudent()" class="btn-login student">
+          Login Étudiant
+        </button>
+        <button (click)="authService.loginAsInstructor()" class="btn-login instructor">
+          Login Instructeur
+        </button>
+      </ng-template>
+    </div>
   </div>
 </nav>
+
 <main class="main-content">
   <router-outlet />
 </main>
