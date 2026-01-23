@@ -125,19 +125,23 @@
       "chapterId": 4
     },
     {
+      "chapterId": 1769126003845,
       "id": 7
     }
   ],
   "progress": [
     {
+      "id": 1,
       "userId": 1,
       "courseId": 1,
       "completedLessons": [
         1,
-        2
+        2,
+        3
       ]
     },
     {
+      "id": 2,
       "userId": 1,
       "courseId": 2,
       "completedLessons": [
@@ -145,11 +149,13 @@
       ]
     },
     {
+      "id": 3,
       "userId": 3,
       "courseId": 1,
       "completedLessons": []
     },
     {
+      "id": 4,
       "userId": 3,
       "courseId": 2,
       "completedLessons": [
@@ -157,6 +163,14 @@
         5,
         6
       ]
+    },
+    {
+      "userId": 1,
+      "courseId": 3,
+      "completedLessons": [
+        7
+      ],
+      "id": 5
     }
   ],
   "quizzes": [
@@ -201,6 +215,21 @@
           "answer": 0
         }
       ]
+    },
+    {
+      "chapterId": 1769126003845,
+      "questions": [
+        {
+          "question": "C'est quoi l'intelligence artificielle ?",
+          "choices": [
+            "une boite noir",
+            "une boite grise ",
+            "une boit verte"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 3
     }
   ],
   "quizResults": [
