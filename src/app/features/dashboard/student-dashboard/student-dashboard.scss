@@ -217,6 +217,30 @@
             }
           }
         }
+
+        .btn-certificate {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: var(--spacing-sm);
+          width: 100%;
+          padding: 0.75rem 1.5rem;
+          background: white;
+          color: #f59e0b;
+          /* Warning color */
+          border: 1px solid #f59e0b;
+          border-radius: var(--radius-md);
+          font-weight: 600;
+          transition: all var(--transition-base);
+          cursor: pointer;
+
+          &:hover {
+            background: #f59e0b;
+            color: white;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+          }
+        }
       }
     }
 

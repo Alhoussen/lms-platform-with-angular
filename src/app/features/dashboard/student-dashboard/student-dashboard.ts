@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CourseService, Course } from '../../../core/course.service';
 import { ProgressService, Progress } from '../../../core/progress.service';
 import { LessonService } from '../../../core/lesson.service';
+import { CertificateService } from '../../../core/certificate.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -14,10 +15,11 @@ import { LessonService } from '../../../core/lesson.service';
 })
 export class StudentDashboard {
   private readonly courseService = inject(CourseService);
-  private readonly lessonService = inject(LessonService); // Needed for total lessons
-  public readonly progressService = inject(ProgressService); // Make public for template if needed
+  private readonly lessonService = inject(LessonService);
+  public readonly progressService = inject(ProgressService);
+  private readonly certificateService = inject(CertificateService);
 
-  readonly userId = 1; // Hardcoded user ID, to be replaced with auth system
+  readonly userId = 1; // Hardcoded user ID
 
   readonly courses = this.courseService.courses;
   readonly allUserProgress = this.progressService.allUserProgress;
@@ -46,6 +48,7 @@ export class StudentDashboard {
     }
     const totalLessonsInCourse = course.chapters.flatMap(c => c.lessons).length;
     const completedLessonsInCourse = progress.completedLessons.length;
+
     return {
       completed: completedLessonsInCourse,
       total: totalLessonsInCourse,
@@ -53,9 +56,32 @@ export class StudentDashboard {
     };
   });
 
+  readonly isEligibleForCertificate = computed(() => (courseId: number) => {
+    const stats = this.getProgressForCourse()(courseId);
+    return this.certificateService.isEligibleForCertificate(stats.completed, stats.total);
+  });
+
   constructor() {
     this.courseService.fetchCourses();
-    this.lessonService.fetchLessons(); // Ensure lessons are fetched for totalPossibleLessons calculation
+    this.lessonService.fetchLessons();
     this.progressService.fetchAllProgressForUser(this.userId);
+  }
+
+  downloadCertificate(course: Course) {
+    // Dans un vrai cas, on récupérerait le nom de l'étudiant depuis un AuthService
+    const studentName = "Alhoussen";
+
+    // Pour cet exemple, on met un score fictif de 100% si le quiz n'est pas lié
+    const score = 100;
+
+    this.certificateService.generateCertificate({
+      id: Date.now(),
+      userId: this.userId,
+      courseId: course.id,
+      courseName: course.title,
+      studentName: studentName,
+      completionDate: new Date(),
+      score: score
+    });
   }
 }

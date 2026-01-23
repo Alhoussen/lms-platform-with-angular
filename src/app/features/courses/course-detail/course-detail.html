@@ -48,7 +48,7 @@
                   <span class="lesson-title">{{ lesson.title }}</span>
                 </button>
                 <button class="completion-toggle" [class.completed]="progressService.isLessonCompleted(lesson.id)()"
-                  (click)="progressService.toggleLessonStatus(userId, c.id, lesson.id)">
+                  (click)="toggleLesson(c.id, lesson.id, $event)">
                   <span *ngIf="progressService.isLessonCompleted(lesson.id)(); else notCompleted">
                     ✓
                   </span>

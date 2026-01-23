@@ -104,6 +104,51 @@
                   </div>
                 </ng-template>
               </div>
+
+              <!-- SECTION QUIZ -->
+              <div class="quiz-management-section">
+                <div class="section-header">
+                  <h5>📝 Quiz de fin de chapitre</h5>
+                  <button type="button" class="btn-add-quiz" *ngIf="!chapter.quiz" (click)="addQuizToChapter(i)">
+                    ➕ Créer un Quiz
+                  </button>
+                </div>
+
+                <div class="quiz-editor" *ngIf="chapter.quiz">
+                  <div *ngFor="let question of chapter.quiz.questions; let qIdx = index" class="question-card">
+                    <div class="question-header">
+                      <h6>Question {{ qIdx + 1 }}</h6>
+                      <button type="button" class="btn-delete-plain" (click)="removeQuestion(i, qIdx)">🗑️</button>
+                    </div>
+
+                    <label class="form-field">
+                      <span class="label-text">Question *</span>
+                      <input [(ngModel)]="question.question" [name]="'q_text_' + i + '_' + qIdx"
+                        placeholder="Ex: Quel est le rôle d'un Service ?" required />
+                    </label>
+
+                    <div class="choices-grid">
+                      <label class="label-text">Choix de réponses (cochez la bonne réponse)</label>
+                      <div class="choice-item"
+                        *ngFor="let choice of question.choices; let cIdx = index; trackBy: trackByIndex">
+                        <div class="radio-wrapper">
+                          <input type="radio" [name]="'q_answer_' + i + '_' + qIdx" [value]="cIdx"
+                            [(ngModel)]="question.answer" />
+                        </div>
+                        <input [(ngModel)]="question.choices[cIdx]" [name]="'q_choice_' + i + '_' + qIdx + '_' + cIdx"
+                          placeholder="Choix {{ cIdx + 1 }}" required class="choice-input" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="quiz-actions">
+                    <button type="button" class="btn-add-question" (click)="addQuestion(i)">
+                      ➕ Ajouter une question
+                    </button>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 

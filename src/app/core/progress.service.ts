@@ -21,7 +21,7 @@ export class ProgressService {
   // Signal to hold all progress records for a specific user (for dashboard view)
   private readonly _allUserProgress = signal<Progress[]>([]);
   readonly allUserProgress: Signal<Progress[]> = this._allUserProgress.asReadonly();
-  
+
   // Derived signal to easily check if a lesson is complete for the current course
   isLessonCompleted(lessonId: number): Signal<boolean> {
     return computed(() => this._currentProgress()?.completedLessons.includes(lessonId) ?? false);
@@ -55,19 +55,19 @@ export class ProgressService {
    * Creates a progress record if one doesn't exist for the course.
    */
   toggleLessonStatus(userId: number, courseId: number, lessonId: number) {
-    const current = this._currentProgress(); // Get the signal for the current course's progress
-    
+    const current = this._currentProgress();
+
     // Determine if we are completing or un-completing the lesson
     const isCompleting = !current?.completedLessons.includes(lessonId);
 
-    if (current) {
+    if (current && current.id) {
       // Progress record exists, so update it
       const updatedLessons = isCompleting
         ? [...current.completedLessons, lessonId]
         : current.completedLessons.filter(id => id !== lessonId);
-      
+
       const updatedRecord = { ...current, completedLessons: updatedLessons };
-      
+
       this.http.put<Progress>(`${this.apiUrl}/${current.id}`, updatedRecord).pipe(
         tap(res => {
           this._currentProgress.set(res); // Update current course progress

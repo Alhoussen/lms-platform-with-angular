@@ -21,7 +21,7 @@ export class CourseDetail {
   private readonly lessonService = inject(LessonService);
   private readonly quizService = inject(QuizService);
   public readonly progressService = inject(ProgressService);
-  
+
   readonly userId = 1; // Hardcoded user ID, to be replaced with auth system
 
   readonly course = computed(() => {
@@ -42,7 +42,7 @@ export class CourseDetail {
 
   readonly totalLessonsCount = computed(() => this.course()?.chapters.flatMap(c => c.lessons).length ?? 0);
   readonly completedLessonsCount = computed(() => this.progressService.currentCourseProgress()?.completedLessons.length ?? 0);
-  
+
   selectedLessonId = signal<number | null>(null);
   selectedChapterId = signal<number | null>(null);
 
@@ -52,7 +52,7 @@ export class CourseDetail {
     const quiz = this.quizService.getQuizByChapter(chapterId);
     return quiz?.questions ?? [];
   }
-  
+
   constructor() {
     this.courseService.fetchCourses();
     this.lessonService.fetchLessons();
@@ -77,5 +77,10 @@ export class CourseDetail {
 
   getLessonVideoUrl(lid: number): string {
     return this.lessons().find(l => l.id === lid)?.videoUrl ?? '';
+  }
+
+  toggleLesson(courseId: number, lessonId: number, event: Event) {
+    event.stopPropagation(); // Empêche le clic de se propager (si nécessaire)
+    this.progressService.toggleLessonStatus(this.userId, courseId, lessonId);
   }
 }
