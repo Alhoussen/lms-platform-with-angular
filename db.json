@@ -85,6 +85,97 @@
         }
       ],
       "id": 3
+    },
+    {
+      "title": "Apprentissage Supervise",
+      "category": "IA",
+      "description": "Apprenez a creer des modeles grace aux technique d'apprentissage supervise",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "title": "Introduction ",
+          "lessons": []
+        }
+      ],
+      "id": 4
+    },
+    {
+      "title": "test",
+      "category": "test",
+      "description": "test",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "title": "test",
+          "lessons": []
+        }
+      ],
+      "id": 5
+    },
+    {
+      "title": "test1",
+      "category": "test1",
+      "description": "test1",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "title": "test",
+          "lessons": []
+        }
+      ],
+      "id": 6
+    },
+    {
+      "title": "test2",
+      "category": "test2",
+      "description": "test",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "id": 1769188625116,
+          "title": "test",
+          "lessons": []
+        }
+      ],
+      "id": 7
+    },
+    {
+      "title": "aws",
+      "category": "cloud",
+      "description": "apprenez le cloud",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "id": 1769792655827,
+          "title": "introduction",
+          "lessons": [
+            {
+              "title": "Installation",
+              "videoUrl": "https://youtu.be/0dBZBEqEbIc"
+            }
+          ]
+        }
+      ],
+      "id": 9
+    },
+    {
+      "title": "test",
+      "category": "test categori",
+      "description": "categori desc",
+      "instructorId": 2,
+      "chapters": [
+        {
+          "id": 1769799949439,
+          "title": "INtroduction",
+          "lessons": [
+            {
+              "title": "installation",
+              "videoUrl": "https://www.youtube.com/watch?v=0dBZBEqEbIc"
+            }
+          ]
+        }
+      ],
+      "id": 10
     }
   ],
   "lessons": [
@@ -230,6 +321,111 @@
         }
       ],
       "id": 3
+    },
+    {
+      "chapterId": 1769185982749,
+      "questions": [
+        {
+          "question": "Qu'es ce que l'apprentissage supervise ?",
+          "choices": [
+            "no",
+            "la statistique",
+            "un alogotrithme"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 4
+    },
+    {
+      "chapterId": 1769186744294,
+      "questions": [
+        {
+          "question": "quiz test",
+          "choices": [
+            "treston",
+            "test",
+            "test"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 5
+    },
+    {
+      "chapterId": 1769187395892,
+      "questions": [
+        {
+          "question": "testquiz",
+          "choices": [
+            "teston",
+            "test",
+            "test"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 6
+    },
+    {
+      "chapterId": 1769188458537,
+      "questions": [
+        {
+          "question": "test",
+          "choices": [
+            "teston",
+            "test",
+            "test"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 7
+    },
+    {
+      "chapterId": 1769188625116,
+      "questions": [
+        {
+          "question": "tetsquiz",
+          "choices": [
+            "teston",
+            "test",
+            "test"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 8
+    },
+    {
+      "chapterId": 1769188949263,
+      "questions": [
+        {
+          "question": "testquiz",
+          "choices": [
+            "teston",
+            "test",
+            "test"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 9
+    },
+    {
+      "chapterId": 1769799949439,
+      "questions": [
+        {
+          "question": "testcquestion",
+          "choices": [
+            "teston",
+            "test",
+            "test"
+          ],
+          "answer": 0
+        }
+      ],
+      "id": 10
     }
   ],
   "quizResults": [
