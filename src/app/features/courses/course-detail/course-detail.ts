@@ -35,8 +35,26 @@ export class CourseDetail {
     const c = this.course();
     if (!c) return {};
     const allLessons = this.lessons();
+    console.log('DEBUG CourseDetail chapters:', c.chapters);
+
     return Object.fromEntries(
-      c.chapters.map(chap => [chap.id, allLessons.filter(lesson => chap.lessons.includes(lesson.id))])
+      c.chapters.map(chap => {
+        // Détecter si les leçons sont stockées comme IDs (number) ou Objets
+        if (chap.lessons.length > 0 && typeof chap.lessons[0] === 'number') {
+          // Cas 1 : IDs (Relationnel) -> On filtre depuis allLessons
+          const lessonIds = chap.lessons as any as number[];
+          return [chap.id, allLessons.filter(lesson => lessonIds.includes(lesson.id))];
+        } else {
+          // Cas 2 : Objets (Nested) -> On utilise direct, mais on s'assure qu'ils ont un ID (simulé si besoin)
+          // Attention : les leçons nested n'ont peut-être pas d'ID unique global, ce qui peut poser problème pour la sélection
+          // On va essayer de mapper pour avoir une structure compatible Lesson
+          const nestedLessons = (chap.lessons as any[]).map((l, index) => ({
+            ...l,
+            id: l.id || (chap.id * 1000 + index) // Génération d'ID temporaire pour la sélection si manquant
+          })) as Lesson[];
+          return [chap.id, nestedLessons];
+        }
+      })
     );
   });
 
@@ -76,7 +94,8 @@ export class CourseDetail {
   }
 
   getLessonVideoUrl(lid: number): string {
-    return this.lessons().find(l => l.id === lid)?.videoUrl ?? '';
+    const allConsolidatedLessons = Object.values(this.lessonsByChapter()).flat();
+    return allConsolidatedLessons.find(l => l.id === lid)?.videoUrl ?? '';
   }
 
   toggleLesson(courseId: number, lessonId: number, event: Event) {
