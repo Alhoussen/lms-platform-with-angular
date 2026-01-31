@@ -24,7 +24,7 @@ interface QuizForm {
 }
 
 interface ChapterForm {
-  id?: number; // Cet ID sera généré par nous si manquant
+  id?: number; //
   title: string;
   lessons: LessonForm[];
   quiz?: QuizForm; // Optional quiz for the chapter
